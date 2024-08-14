@@ -1,6 +1,6 @@
 <?php 
 
-function conectarDB() : mysqli
+function connectDB() : mysqli
 {
     $db = mysqli_connect('localhost', 'root','','ejercicio1');
 

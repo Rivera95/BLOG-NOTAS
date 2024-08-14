@@ -8,15 +8,14 @@
 
     //CONEXION BD
     require 'includes/config/database.php';
-    $db = conectarDB();
+    $db = connectDB();
 
-    //QUERY DE CONSULTA
+    //SQL PARA CONSULTAR
     $query = "SELECT * FROM notas";
     $resultadoConsulta = mysqli_query($db, $query);
   
     //LLAMAR EL HEADER
     include 'includes/templates/header.php';
-
 ?>
 
 <body class="sb-nav-fixed">

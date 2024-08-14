@@ -11,12 +11,12 @@
 
     //CONEXION BD
     require 'includes/config/database.php';
-    $db = conectarDB();
+    $db = connectDB();
 
-    //ARREGLO DE ERRORES
+    //ERRORES
     $errores = [];
 
-    //SANITIZAR LOS DATOS QUE VAMOS A INGRESA
+    //SANITIZAR DATOS
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
       $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
       $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
@@ -32,27 +32,21 @@
         $errores[] = "Debes ingresar una descripcion";
       }
 
-      //VALIDAR EL ARREGLO DE ERRORES SI ESTA VACIO ME HAGA LA FUINCION
+      //VALIDAR ERRORES
       if(empty($errores)){
-         //QUERY PARA INSERTAR
+         //SQL PARA INSERTAR DATOS
          $query = "INSERT INTO notas (titulo, descripcion, fecha_creada, id_usuario) VALUES ( '${titulo}', '${descripcion}', '${fecha_creada}', '${id_usuario}');";
          $resultado = mysqli_query($db, $query);
-        //  echo $query;
 
-         //CONFIRMAR QUE INSERTO
+         //CONFIRMAR
          if($resultado){
             header('Location: /block.php');
          }
       }
     }
 
-
-
     //LLAMAR EL HEADER
     include 'includes/templates/header.php';
-
-
-
 ?>
 
 <body class="sb-nav-fixed">

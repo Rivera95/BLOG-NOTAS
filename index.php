@@ -1,17 +1,15 @@
 <?php 
-   
    //CONEXION BD
    require 'includes/config/database.php';
-   $db = conectarDB();
+   $db = connectDB();
 
-   // ARREGLO DE ERRORES VACIO
+   //ERRORES
    $errores = [];
 
    //AUTENTICAR USUARIO
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $email = mysqli_real_escape_string($db, filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL));
     $password = mysqli_real_escape_string($db, $_POST['password'] );
-    // var_dump($_POST['password']);
 
     if(!$email){
         $errores[] = "El campo Email es obligatorio";
@@ -21,34 +19,30 @@
         $errores[] = "El campo Password es obligatorio";
     }
 
-    // SI LA VALIDACION ESTA VACIA ME HAGA LA CONSULTA A BD
+    //VALIDAR ERRORES
     if(empty($errores)){
-      // QUERY
+      //SQL PARA CONSULTAR
       $query = "SELECT * FROM usuarios WHERE email = '${email}'";
       $resultado = mysqli_query($db, $query);
-    //   var_dump($resultado);
 
     if( $resultado->num_rows ){
-       //REVISAR EL PASSWORD
+       //CONSULTA PASSWORD
        $registroUsuario  = mysqli_fetch_assoc($resultado);
-       //AQUI VALIDAMOS EL PASSWORD
+       //VALIDAR PASSWORD
        $auth = password_verify($password, $registroUsuario['password']);
-    //    var_dump($auth);
 
     if($auth){
-         //SI ES CORRECTO INICIA SESION
          session_start();
 
-         //LLENAR EL ARREGLO SESSION
+         //ARRAY DE SESION
          $_SESSION['usuario'] = $registroUsuario['email'];
          $_SESSION['id'] = $registroUsuario['id'];
          $_SESSION['login'] = true;
-       var_dump($_SESSION);
          
          header('Location: /block.php');
 
     } else {
-        $errores[] = "El password es incorrecto"; // EN CASO CONTRARIO
+        $errores[] = "El password es incorrecto";
     }
 
     } else {
@@ -59,7 +53,6 @@
 
    //  LLAMAR EL HEADER
    include 'includes/templates/header.php';
-
 ?>
 
 <main class="login-form">

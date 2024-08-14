@@ -1,18 +1,17 @@
 <?php  
    //CONEXION BD
    require 'includes/config/database.php';
-   $db = conectarDB();
+   $db = connectDB();
 
    //ARREGLO DE ERRORES
    $errores = [];
 
-   //SANITIZAR LOS DATOS QUE VAMOS A INGRESAR
+   //SANITIZAR LOS DATOS
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-      
     $email = mysqli_real_escape_string($db, $_POST['email']);
     $password = mysqli_real_escape_string($db, $_POST['password']);
 
-    //IF PARA HACER LAS VALIDACIONES DE LOS CAMPOS
+    //VALIDAR CAMPOS
     if(!$email){
         $errores[] = "Debes insertar un email";
     }
@@ -23,17 +22,14 @@
 
     //HASHEAR LA CONTRASEÑA
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-    // var_dump($passwordHash);
 
-    //SI LA VALIDACION ESTA VACIA ME HAGA LA CONSULTA
+    //VALIDAR CONSULTA
     if(empty($errores)){
-        
-        //QUERY PARA INSERTAR LOS DATOS
+        //SQL PARA INSERTAR DATOS
         $query = "INSERT INTO usuarios (email, password) VALUES ( '${email}', '${passwordHash}');";
-        // echo $query;
         $resultado = mysqli_query($db, $query);
 
-    //CONFIRMAR QUE INSERTO EL USUARIO
+    //VALIDAR
     if($resultado){
          header('Location: /block.php');
     }
@@ -41,11 +37,10 @@
    
    }
 
-   
    //LLAMAR EL HEADER
    include 'includes/templates/header.php';
-
 ?>
+
 <main class="login-form">
     <div class="container">
         <div class="row justify-content-center">
