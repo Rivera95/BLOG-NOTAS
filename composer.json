@@ -1,0 +1,17 @@
+{
+    "name": "cristian/blog-notas",
+    "description": "Entrenamiento",
+    "autoload": {
+        "psr-4": {
+            "Cristian\\BlogNotas\\": "src/",
+            "App\\Models\\": "src/Models/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Cristian Javier Rivera Buritica",
+            "email": "javi-cali1995@hotmail.com"
+        }
+    ],
+    "require": {}
+}
