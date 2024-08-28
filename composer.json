@@ -3,9 +3,9 @@
     "description": "Entrenamiento",
     "autoload": {
         "psr-4": {
-            "Cristian\\BlogNotas\\": "src/",
-            "App\\Models\\": "src/Models/",
-            "App\\Controllers\\": "src/Controllers/"
+            "MVC\\" : "./",
+            "Controllers\\" : "./controllers",
+            "Model\\" : "./models"
         }
     },
     "authors": [
@@ -15,6 +15,8 @@
         }
     ],
     "require": {
-        "symfony/http-foundation": "^6.4"
+        "symfony/http-foundation": "^6.4",
+        "symfony/routing": "^6.4",
+        "symfony/http-kernel": "^6.4"
     }
 }
