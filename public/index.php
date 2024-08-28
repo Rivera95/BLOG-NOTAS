@@ -6,7 +6,7 @@ use App\Controllers\UserController;
 use Symfony\Component\HttpFoundation\Request;
 
 
-$db = new mysqli('host', 'user', 'password', 'database');
+$db = new mysqli('localhost', 'root','daruma','blog_notas');
 
 if ($db->connect_error) {
     die('Error en la conexión a la base de datos: ' . $db->connect_error);
