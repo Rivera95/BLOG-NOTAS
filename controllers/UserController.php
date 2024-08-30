@@ -36,7 +36,7 @@ class UserController
             }
         }
 
-        $alert = User::setAlerta();
+        $alert = User::getAlertas();
 
         $router->render('auth/login', [
             'alertas' => $alert
