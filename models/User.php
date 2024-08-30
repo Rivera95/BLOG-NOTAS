@@ -5,17 +5,19 @@ namespace Model;
 class User extends ActiveRecord 
 {
     protected static $table = 'users';
-    protected static $columnBd = ['id', 'email', 'password', 'created_at'];
+    protected static $columnBd = ['id', 'email', 'password', 'created_at', 'admin'];
 
     public $id;
     public $email;
     public $password;
     public $created_at;
+    public $admin;
 
     public function __construct($args = []) {
         $this->id = $args['id'] ?? null;
         $this->email = $args['email'] ?? null;
         $this->password = $args['password'] ?? null;
+        $this->admin = $args['admin'] ?? null;
         $this->created_at = $args['created_at'] ?? null;
     }
 
